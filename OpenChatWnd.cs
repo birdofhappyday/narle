@@ -20,6 +20,9 @@ namespace Assets.Scripts.UI.Windows.Lobby
     {
         #region 사용 클래스
 
+        /// <summary>
+        /// 검색어 창에 보이는 글자 세팅.
+        /// </summary>
         public class BeforeSearchInputString
         {
             public string msearchString = string.Empty;
@@ -681,7 +684,7 @@ namespace Assets.Scripts.UI.Windows.Lobby
         #region BasicFunction
 
         /// <summary>
-        /// OpenChatWnd를 처음 열음.
+        /// OpenChatWnd를 처음 열음. 상대방이 이전에 방문한적이 없을 경우 설정창을 연다.
         /// </summary>
         private void FirstVisitOpenChatWnd()
         {
@@ -695,7 +698,8 @@ namespace Assets.Scripts.UI.Windows.Lobby
         }
 
         /// <summary>
-        /// 기본 모드 열기.
+        /// 오픈 채팅 카테고리 기본 창. 기본적인 윈도우창으로 방 목록이 있는 창이다.
+        /// 따로 알림 매칭 키워드 설정으로 들어올 수 있는데 그 경우에는 검색창이 대신 나온다.
         /// </summary>
         private void OpenChatBasicRoom()
         {
@@ -731,7 +735,9 @@ namespace Assets.Scripts.UI.Windows.Lobby
             RefreshWnd(true);
         }
 
-        // [gh050708] 클리어 추가.
+        /// <summary>
+        /// 위에 검색창을 클릭 했을때의 설정. 이전 검색어가 있을 경우 아래에 표시한다.
+        /// </summary>
         public void OnClickClearInput()
         {
             searchInput.value = "";
@@ -751,7 +757,8 @@ namespace Assets.Scripts.UI.Windows.Lobby
         }
 
         /// <summary>
-        /// 검색 모드 열기.
+        /// 유저가 검색창에 검색어를 입력했을 때 해당되는 방 목록을 표시한다.
+        /// 해당되는 방이 없을 경우에는 따로 없다는 이미지를 띄운다.
         /// </summary>
         private void OpenChatSearchRoom()
         {
@@ -760,11 +767,6 @@ namespace Assets.Scripts.UI.Windows.Lobby
                 this.childList[i].gameObject.SetActive(false);
             }
 
-            // [gh050905] 키워드 기록을 남기를 쪽으로 수정됨.
-            //if (!matchingActive)
-            //{
-            //    searchInput.value = "";
-            //}
             this.childList[1].gameObject.SetActive(true);
             searchResultGribEX.gameObject.SetActive(false);
             beforeSearchScrollEX.gameObject.SetActive(true);
@@ -852,7 +854,7 @@ namespace Assets.Scripts.UI.Windows.Lobby
         }
 
         /// <summary>
-        /// InitSearchFiliterOption : 첫번째 검색 필터 오브젝트 끄기.
+        /// InitSearchFiliterOption : 첫번째 검색 필터 오브젝트 끄기. 검색 필터 옵션(인원수나 종류)
         /// </summary>
         private void InitSearchFirstFiliterOption(bool all = true, int index = 0)
         {
@@ -868,7 +870,7 @@ namespace Assets.Scripts.UI.Windows.Lobby
         }
 
         /// <summary>
-        /// InitSearchFiliterOption : 두번째 검색 필터 오브젝트 끄기.
+        /// InitSearchFiliterOption : 두번째 검색 필터 오브젝트 끄기. 검색 필터 옵션(첫번째에 따른 옵션)
         /// </summary>
         private void InitSearchSecondFiliterOption(bool all = true, int index = 0)
         {
